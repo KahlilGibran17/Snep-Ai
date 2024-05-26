@@ -1,0 +1,34 @@
+{% extends "base.html" %} {% block css %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{{url_for('static', filename='css/chatbot.css')}}"
+/>
+{% endblock %} {% block title_content %} Chatbot {% endblock %} {%block content
+%}
+<!-- ===== Chatbot ==== -->
+<div class="chatbot-container" id="chatbot-container">
+  <div class="chatbot">
+    <!-- <header class="d-flex align-items-center">
+      <h2>Mash - 2.1</h2>
+    </header> -->
+    <!-- ===== Chatbox ===== -->
+    <ul class="chatbox">
+      <li class="chat incoming">
+        <i class="bx bx-bot icon"></i>
+        <p>Hi there 👋<br />How can I help you today?</p>
+      </li>
+    </ul>
+
+    <div class="chat-input d-flex align-items-center">
+      <input type="text" id="input-text-user" />
+      <i class="bx bx-send icon" id="send-btn"></i>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script src="{{url_for('static', filename='js/chatbot.js')}}">
+</script>
+{% endblock %}

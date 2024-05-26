@@ -1,0 +1,48 @@
+{% extends "newsvalidation/scan.html" %} {% block input %}
+<div class="mb-3">
+  <label for="title" class="form-label">
+    <h4>News Title</h4>
+  </label>
+  <input
+    type="text"
+    class="form-control"
+    id="input-title"
+    name="title"
+    placeholder="Insert News Title here."
+    required
+  />
+</div>
+<div class="mb-3">
+  <label for="content" class="form-label">
+    <h4>News Content</h4>
+  </label>
+  <textarea
+    class="form-control"
+    id="input-content"
+    name="content"
+    rows="3"
+    placeholder="Insert News Content here."
+    required
+  ></textarea>
+</div>
+<div class="mb-3">
+  <label for="type" class="form-label">
+    <h4>News Type</h4>
+  </label>
+  <select class="form-select" name="type" id="type" required>
+    <!-- option insert here -->
+    <option selected disabled>-- Select news type --</option>
+    {% if countCategories > 0 %}
+      {% for category in categories %}
+        <option value="{{ category.id }}">{{ category.label }}</option>
+      {% endfor %}
+    {% endif %}
+  </select>
+</div>
+<div class="mb-3">
+  <label for="">
+    <h4>Date Validation</h4>
+  </label>
+  <input type="date" class="form-control" id="input-date" name="input_date" required/>
+</div>
+{% endblock%}

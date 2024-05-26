@@ -1,0 +1,58 @@
+{% extends "base.html" %} {% block css%}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{{url_for('static', filename='css/newsvalidation.css')}}"
+/>
+{% endblock %}
+
+{% block title_content %} News Validation {% endblock %}
+
+{% block content %}
+<div class="newsvalidation-container d-flex flex-column p-4">
+  <table class="">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">News Title</th>
+        <th scope="col">Date</th>
+        <th scope="col">Status</th>
+        <th scope="col">Probability</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody id="history">
+      {% if count_promptLog > 0 %}
+        {% for history in user_histories %}
+          <tr>
+            <th scope="row">{{ loop.index }}</th>
+            <td class="font-weight-bold">
+              {{ history.title }}
+            </td>
+            <td>
+              {{ history.date }}
+            </td>
+            <td>
+              {% if history.status == 'True' %}
+                <span class="p-1 bg-success rounded text-white">Valid</span>
+                {% else %}
+                <span class="p-1 bg-danger rounded text-white">Fake</span>
+              {% endif %}
+            </td>
+            <td>{{ history.probability }}%</td>
+            <td>
+              <a href="{{ url_for('informationValidation.detail', id=history.id) }}" class="btn btn-info text-white">
+                <i class="bx bx-info-circle"></i>
+              </a>
+            </td>
+          </tr>
+        {% endfor %}
+      {% else %}
+        <tr>
+            <td colspan="100" class="text-center">No Result Found.</td>
+        </tr>
+      {% endif %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

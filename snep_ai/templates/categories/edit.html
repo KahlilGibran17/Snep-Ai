@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/newscan.css')}}"/>
+    
+    <style>
+        .form-check input:checked {
+            background-color: #f64c72;
+            border-color: white;
+        }
+        
+        .form-check input[type=radio] {
+            border-radius: 50%;
+        }
+        
+        .form-check .form-check input {
+            float: left;
+            margin-left: -1.5em;
+        }
+
+        .form-check input {
+            --bs-form-check-bg: white;
+            flex-shrink: 0;
+            width: 1em;
+            height: 1em;
+            margin-top: .25em;
+            vertical-align: top;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-color: white;
+            background-image: var(--bs-form-check-bg-image);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            border: var(--bs-border-width) solid white;
+            -webkit-print-color-adjust: exact;
+            color-adjust: exact;
+            print-color-adjust: exact;
+        }
+    </style>
+{% endblock %}
+
+{% block title_content %}
+    Manage Categories
+{% endblock %}
+
+{% block content %}
+<div class="main-content col-12 mt-4">
+    <h3>Edit Category</h3>
+    <div class="mb-3">
+        <a href="{{ url_for('informationCategory.index') }}" class="btn btn-secondary">
+            <i class="bx bx-left-arrow-alt icon"></i>
+            Back
+        </a>
+    </div>
+    
+    {% with messages = get_flashed_messages(category_filter=["success"]) %}
+        {% if messages %}
+            <div class="mt-4">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Success!</strong> {{ messages[0] }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    {% with messages = get_flashed_messages(category_filter=["warning"]) %}
+        {% if messages %}
+            <div class="mt-4">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Warning!</strong> {{ messages[0] }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    {% with messages = get_flashed_messages(category_filter=["error"]) %}
+        {% if messages %}
+            <div class="mt-4">
+                <div class="alert alert-error alert-dismissible fade show" role="alert">
+                    <strong>Error!</strong> {{ messages[0] }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('informationCategory.edit', id=category.id) }}" autocomplete="off">
+        <div class="form-group">
+            <h4><label for="category_label">Category Label</label></h4>
+            <input type="text" class="form-control" name="category_label" value="{{ category.label }}">
+        </div>
+    
+        <div class="row justify-content-end pt-3">
+            <div class="col-auto">
+                <input type="submit" class="btn btn-submit px-4 py-2"></input>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,136 @@
+{% extends "base.html" %} {% block css%}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{{url_for('static', filename='css/dashboard.css')}}"
+/>
+{% endblock %} {% block title_content %} SNEP AI | Dashboard {% endblock %} {%block
+content %}
+<div class="col-12 container border-1 d-flex row mb-3 ms-1">
+    
+  {% with messages = get_flashed_messages(category_filter=["success"]) %}
+    {% if messages %}
+        <div>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Success!</strong> {{ messages[0] }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    {% endif %}
+  {% endwith %}
+
+  {% with messages = get_flashed_messages(category_filter=["warning"]) %}
+    {% if messages %}
+        <div>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Warning!</strong> {{ messages[0] }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    {% endif %}
+  {% endwith %}
+
+  {% with messages = get_flashed_messages(category_filter=["error"]) %}
+    {% if messages %}
+        <div>
+            <div class="alert alert-error alert-dismissible fade show" role="alert">
+                <strong>Error!</strong> {{ messages[0] }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    {% endif %}
+  {% endwith %}
+
+  <div class="container-news mb-4 row">
+    <div class="dash category d-flex align-items-center col-12">
+      <h2>Latest News</h2>
+    </div>
+    {% for informationList in informationLists %}
+      {% if loop.index == 1 %}
+        <div class="news headline col-md-6">
+          <a class="card p-0 border border-0" href="{{ url_for('informationLists.detail_dashboard', id=informationList.id) }}">
+            <img
+              class="card-img-top rounded-3"
+              src="/static/images/{{ informationList.image }}"
+              alt="Card image cap"
+            />
+            <div class="card-body p-0 news-content">
+              <h6 class="title">
+                {{ informationList.title }}
+              </h6>
+              <p>
+                {{ informationList.content[0:105]|striptags }}
+              </p>
+              <span class="news-category">{{ informationList.information_category.label }}</span>
+            </div>
+          </a>
+        </div>
+      {% endif %}
+    {% endfor %}
+
+    <ul class="dash news-container gap-3 col-md-6">
+    {% for informationList in informationLists %}
+      {% if loop.index > 1 %}
+          <a class="news news-item card d-flex border border-0 ms-3" href="{{ url_for('informationLists.detail_dashboard', id=informationList.id) }}">
+            <div class="card-body d-flex gap-3 p-0">
+              <div class="img-wrapper" style="min-width: 240px; max-height: 160px;">
+                <img
+                  src="static/images/{{ informationList.image }}"
+                  class=""
+                  alt="Image"
+                />
+              </div>
+              <div>
+                <h6 class="card-text title">
+                  {{ informationList.title }}
+                </h6>
+              </div>
+            </div>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </ul>
+
+  </div>
+  <div class="col-12 dash validation-container">
+    <div class="dash category d-flex align-items-center">
+      <h2>Latest Validation</h2>
+    </div>
+    <div class="validation-wrapper">
+        {% if count_promptLog > 0 %}
+          {% for promptLog in promptLogs %}
+            <a class="card validation-item mt-3 ms-3 w-80 bg-validation-item" href="{{ url_for('informationValidation.detail', id=promptLog.id) }}">
+              <div class="card-body">
+                <h6 class="card-title d-flex align-items-center">
+                  {{ promptLog.title[0:70] }}
+                  <span class="stat-wrapper ml-auto">
+                    {% if promptLog.status == 'true' %}
+                      <span class="status true">Valid</span>
+                    {% else %}
+                      <span class="status false">Fake</span>
+                    {% endif %}
+                    <span class="percentages">{{ promptLog.probability }}%</span>
+                  </span>
+                </h6>
+                <!-- <p class="card-text">
+                </p> -->
+              </div>
+            </a>
+          {% endfor %}
+        {% else %}
+          <a class="card validation-item mt-3 ms-3 w-80 bg-validation-item" href="#" disabled>
+            <div class="card-body">
+              <h6 class="card-title d-flex align-items-center">
+                No Records Found.
+              </h6>
+              <!-- <p class="card-text">
+              </p> -->
+            </div>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock %} {% block javascript %}
+<script src="{{url_for('static', filename='js/dashboard.js')}}"></script>
+{% endblock %}

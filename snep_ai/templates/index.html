@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>SNEP AI</title>
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+    <!-- <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('static', filename='css/index.css')}}"
+    /> -->
+    <!-- Vendor CSS Files -->
+    <link
+      href="{{url_for('static', filename='assets/vendor/aos/aos.css')}}"
+      rel="stylesheet"
+    />
+    <link
+      href="{{url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css')}}"
+      rel="stylesheet"
+    />
+    <link
+      href="{{url_for('static', filename='assets/vendor/bootstrap-icons/bootstrap-icons.css')}}"
+      rel="stylesheet"
+    />
+    <link
+      href="{{url_for('static', filename='assets/vendor/glightbox/css/glightbox.min.css')}}"
+      rel="stylesheet"
+    />
+    <link
+      href="{{url_for('static', filename='assets/vendor/remixicon/remixicon.css')}}"
+      rel="stylesheet"
+    />
+    <link
+      href="{{url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.css')}}"
+      rel="stylesheet"
+    />
+
+    <!-- Template Main CSS File -->
+    <link
+      href="{{url_for('static', filename='assets/css/style.css')}}"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top">
+      <div
+        class="container-fluid container-xl d-flex align-items-center justify-content-between"
+      >
+        <a href="index.html" class="logo d-flex align-items-center">
+          <!-- <img
+            src="static\assets\google_logo.svg"
+            alt=""
+            style="width: 40px; height: 40px"
+          /> -->
+          <svg
+            width="50"
+            height="50"
+            viewBox="0 0 70 70"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M52.7936 9.06817C48.2693 3.13577 41.4249 0 33.0001 0C24.5753 0 17.7309 3.13577 13.2067 9.06817C9.31253 14.1743 7.25415 21.1057 7.25415 29.1131C7.25415 37.8763 9.75803 46.8929 14.1237 53.8508C19.0397 61.6854 25.7434 66 33.0001 66C40.2567 66 46.9606 61.6854 51.8763 53.8508C56.2421 46.8929 58.7459 37.8764 58.7459 29.1131C58.746 21.1057 56.6876 14.1743 52.7936 9.06817ZM15.4398 47.1759L20.4054 48.0716L21.6035 56.4509C19.1446 53.9739 17.0612 50.7709 15.4398 47.1759ZM30.8479 49.1784H26.4939V53.4827H30.8479V61.5246C29.3206 61.2835 27.8581 60.7899 26.4703 60.0802L24.2267 44.3871L13.6531 42.4799C12.2979 38.1827 11.5586 33.5745 11.5586 29.1132C11.5586 23.0081 12.9463 17.4918 15.4968 13.3346V19.7206H19.8011V8.42905C21.1644 7.34675 22.6798 6.47728 24.3417 5.81986V18.1938L30.8479 21.8767V49.1784ZM30.8479 16.9305L28.646 15.6842V4.64552C29.3595 4.52796 30.0939 4.44146 30.8479 4.38487V16.9305ZM35.1523 4.38487C35.9064 4.44159 36.6406 4.52809 37.3541 4.64552V15.6842L35.1523 16.9305V4.38487ZM44.3968 56.4508L45.5949 48.0715L50.5605 47.1757C48.9389 50.7709 46.8556 53.9739 44.3968 56.4508ZM41.7736 44.3868L39.5298 60.08C38.142 60.7896 36.6794 61.2833 35.1522 61.5245V53.4826H39.5061V49.1782H35.1522V21.8767L41.6583 18.1937V5.81973C43.3202 6.47715 44.8356 7.34675 46.1989 8.42892V19.7206H50.5032V13.3346C53.0536 17.4917 54.4414 23.008 54.4414 29.1131C54.4414 33.5744 53.702 38.1828 52.347 42.4798L41.7736 44.3868Z"
+              fill="#F64C72"
+            />
+            <path
+              d="M44.258 26.2695C40.4336 26.2695 37.322 29.3809 37.322 33.2055C37.322 37.03 40.4336 40.1415 44.258 40.1415C48.0825 40.1415 51.194 37.0301 51.194 33.2055C51.194 29.3811 48.0825 26.2695 44.258 26.2695ZM44.258 35.8371C42.807 35.8371 41.6265 34.6566 41.6265 33.2055C41.6265 31.7545 42.807 30.574 44.258 30.574C45.7089 30.574 46.8896 31.7545 46.8896 33.2055C46.8896 34.6566 45.7089 35.8371 44.258 35.8371Z"
+              fill="#F64C72"
+            />
+            <path
+              d="M44.2571 34.9926C45.2443 34.9926 46.0446 34.1924 46.0446 33.2052C46.0446 32.2181 45.2443 31.4178 44.2571 31.4178C43.27 31.4178 42.4697 32.2181 42.4697 33.2052C42.4697 34.1924 43.27 34.9926 44.2571 34.9926Z"
+              fill="#F64C72"
+            />
+            <path
+              d="M21.7421 26.2695C17.9177 26.2695 14.8062 29.3811 14.8062 33.2055C14.8062 37.03 17.9176 40.1415 21.7421 40.1415C25.5666 40.1415 28.6781 37.03 28.6781 33.2055C28.6781 29.3811 25.5666 26.2695 21.7421 26.2695ZM21.7421 35.8371C20.2911 35.8371 19.1106 34.6566 19.1106 33.2055C19.1106 31.7545 20.2911 30.574 21.7421 30.574C23.1932 30.574 24.3737 31.7545 24.3737 33.2055C24.3737 34.6566 23.1932 35.8371 21.7421 35.8371Z"
+              fill="#F64C72"
+            />
+            <path
+              d="M21.7413 34.9926C22.7284 34.9926 23.5287 34.1924 23.5287 33.2052C23.5287 32.2181 22.7284 31.4178 21.7413 31.4178C20.7541 31.4178 19.9539 32.2181 19.9539 33.2052C19.9539 34.1924 20.7541 34.9926 21.7413 34.9926Z"
+              fill="#F64C72"
+            />
+          </svg>
+          <span class="fs-3">SNEP AI</span>
+        </a>
+
+        <nav id="navbar" class="navbar">
+          <ul>
+            <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+            <li><a class="nav-link scrollto" href="#services">Services</a></li>
+            <li><a class="nav-link scrollto" href="#about">About Us</a></li>
+            <li><a class="nav-link scrollto" href="#team">Team</a></li>
+              <a class="getstarted scrollto" href="{{ url_for('auth.login') }}">Get Started</a>
+            </li>
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+        <!-- .navbar -->
+      </div>
+    </header>
+    <!-- End Header -->
+
+    <!-- ======= Hero Section ======= -->
+    <section id="hero" class="hero d-flex align-items-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 d-flex flex-column justify-content-center">
+            <h1 data-aos="fade-up" class="fs-1">
+              Unveiling Truth, Exposing Deception
+            </h1>
+            <h2 data-aos="fade-up" data-aos-delay="400" class="fs-6">
+              Using advanced AI technology, we sift through the noise to bring you accurate news detection. Stay informed and empowered with our reliable platform.
+            </h2>
+            <div data-aos="fade-up" data-aos-delay="600">
+              <div class="text-center text-lg-start">
+                <a
+                  href="{{ url_for('auth.login') }}"
+                  class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center"
+                >
+                  <span>Get Started</span>
+                  <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div
+            class="col-lg-6 hero-img"
+            data-aos="zoom-out"
+            data-aos-delay="200"
+          >
+          <img src="static\assets\img\hero-img3.png" class="img-fluid ms-4" alt="" style="height: 50vh; width: 45vw;">
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Hero -->
+
+    <main id="main">
+      <!-- ======= Services Section ======= -->
+      <section id="services" class="services">
+        <div class="container" data-aos="fade-up">
+          <header class="section-header">
+            <h2>Services</h2>
+            <p> Our Awesome Services!</p>
+          </header>
+
+          <div class="row gy-4 d-flex justify-content-center">
+            <div
+              class="col-lg-4 col-md-6"
+              data-aos="fade-up"
+              data-aos-delay="500"
+            >
+              <div class="service-box red">
+                <img
+                      src="static\assets\img\news-icon.png"
+                      class="testimonial-img mb-4"
+                      alt=""
+                      style="border-radius: 5px; padding: 1rem; background-color: white; width: 96px; height: 96px;"
+                    />
+                <h3>Information Validation</h3>
+                <p>
+                  Non et temporibus minus omnis sed dolor esse consequatur.
+                  Cupiditate sed error ea fuga sit provident adipisci neque.
+                </p>
+                
+              </div>
+            </div>
+            <div
+              class="col-lg-4 col-md-6"
+              data-aos="fade-up"
+              data-aos-delay="500"
+            >
+              <div class="service-box red">
+                <img
+                      src="static\assets\img\chatbot-icon.png"
+                      class="testimonial-img mb-4"
+                      alt=""
+                      style="border-radius: 5px; padding: 1rem; background-color: white;"
+                    />
+                <h3>Chatbot</h3>
+                <p>
+                  Non et temporibus minus omnis sed dolor esse consequatur.
+                  Cupiditate sed error ea fuga sit provident adipisci neque.
+                </p>
+                
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      </section>
+      <!-- End Services Section -->
+
+
+      <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+
+      <div class="container" data-aos="fade-up">
+        <div class="row gx-0">
+
+          <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+            <div class="content">
+              <h3>Who We Are</h3>
+              <h2>Expedita voluptas omnis cupiditate totam eveniet nobis sint iste. Dolores est repellat corrupti reprehenderit.</h2>
+              <p>
+                Quisquam vel ut sint cum eos hic dolores aperiam. Sed deserunt et. Inventore et et dolor consequatur itaque ut voluptate sed et. Magnam nam ipsum tenetur suscipit voluptatum nam et est corrupti.
+              </p>
+              <div class="text-center text-lg-start">
+                <a href="#" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
+                  <span>Read More</span>
+                  <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
+            <img src="static\assets\img\about.jpg" class="img-fluid" alt="">
+          </div>
+
+        </div>
+      </div>
+
+    </section><!-- End About Section -->
+
+      <!-- ======= Team Section ======= -->
+      <section id="team" class="team">
+        <div class="container" data-aos="fade-up">
+          <header class="section-header">
+            <h2>Team</h2>
+            <p>Our hard working team</p>
+          </header>
+
+          <div class="row gy-4 gx-3 d-flex justify-content-center p-0 m-0">
+            <div
+              class="col-lg-2 col-md-6 d-flex align-items-stretch"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <div class="member">
+                <div class="member-img">
+                  <img
+                    src="static\assets\img\team\team-1.jpg"
+                    class="img-fluid"
+                    alt=""
+                  />
+                  <div class="social">
+                    <a href=""><i class="bi bi-twitter"></i></a>
+                    <a href=""><i class="bi bi-facebook"></i></a>
+                    <a href=""><i class="bi bi-instagram"></i></a>
+                    <a href=""><i class="bi bi-linkedin"></i></a>
+                  </div>
+                </div>
+                <div class="member-info">
+                  <h4>M. Yusuf Khalil Gibran</h4>
+                  <span>Data Analyst</span>
+                  <p>
+                    Velit aut quia fugit et et. Dolorum ea voluptate vel tempore
+                    tenetur ipsa quae aut. Ipsum exercitationem iure minima enim
+                    corporis et voluptate.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="col-lg-2 col-md-6 d-flex align-items-stretch"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <div class="member">
+                <div class="member-img">
+                  <img
+                    src="static\assets\img\team\team-3.jpg"
+                    class="img-fluid"
+                    alt=""
+                  />
+                  <div class="social">
+                    <a href=""><i class="bi bi-twitter"></i></a>
+                    <a href=""><i class="bi bi-facebook"></i></a>
+                    <a href=""><i class="bi bi-instagram"></i></a>
+                    <a href=""><i class="bi bi-linkedin"></i></a>
+                  </div>
+                </div>
+                <div class="member-info">
+                  <h4>Richie Lie Gunawan</h4>
+                  <span>AI-Logic Engineer</span>
+                  <p>
+                    Quo esse repellendus quia id. Est eum et accusantium
+                    pariatur fugit nihil minima suscipit corporis. Voluptate sed
+                    quas reiciendis animi neque sapiente.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="col-lg-2 col-md-6 d-flex align-items-stretch"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
+              <div class="member">
+                <div class="member-img">
+                  <img
+                    src="static\assets\img\team\team-2.jpg"
+                    class="img-fluid"
+                    alt=""
+                  />
+                  <div class="social">
+                    <a href=""><i class="bi bi-twitter"></i></a>
+                    <a href=""><i class="bi bi-facebook"></i></a>
+                    <a href=""><i class="bi bi-instagram"></i></a>
+                    <a href=""><i class="bi bi-linkedin"></i></a>
+                  </div>
+                </div>
+                <div class="member-info">
+                  <h4>Angeline Eldisc</h4>
+                  <span>Backend Engineer</span>
+                  <p>
+                    Vero omnis enim consequatur. Voluptas consectetur unde qui
+                    molestiae deserunt. Voluptates enim aut architecto porro
+                    aspernatur molestiae modi.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="col-lg-2 col-md-6 d-flex align-items-stretch"
+              data-aos="fade-up"
+              data-aos-delay="400"
+            >
+              <div class="member">
+                <div class="member-img">
+                  <img
+                    src="static\assets\img\team\team-4.jpg"
+                    class="img-fluid"
+                    alt=""
+                  />
+                  <div class="social">
+                    <a href=""><i class="bi bi-twitter"></i></a>
+                    <a href=""><i class="bi bi-facebook"></i></a>
+                    <a href=""><i class="bi bi-instagram"></i></a>
+                    <a href=""><i class="bi bi-linkedin"></i></a>
+                  </div>
+                </div>
+                <div class="member-info">
+                  <h4>Nisrina Putri Adila</h4>
+                  <span>Frontend Engineer</span>
+                  <p>
+                    Rerum voluptate non adipisci animi distinctio et deserunt
+                    amet voluptas. Quia aut aliquid doloremque ut possimus ipsum
+                    officia.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="col-lg-2 col-md-6 d-flex align-items-stretch"
+              data-aos="fade-up"
+              data-aos-delay="400"
+            >
+              <div class="member">
+                <div class="member-img">
+                  <img
+                    src="static\assets\img\team\team-5.jpg"
+                    class="img-fluid"
+                    alt=""
+                  />
+                  <div class="social">
+                    <a href=""><i class="bi bi-twitter"></i></a>
+                    <a href=""><i class="bi bi-facebook"></i></a>
+                    <a href=""><i class="bi bi-instagram"></i></a>
+                    <a href=""><i class="bi bi-linkedin"></i></a>
+                  </div>
+                </div>
+                <div class="member-info">
+                  <h4>Yocelin Faristi Daely</h4>
+                  <span>UI/UX Designer</span>
+                  <p>
+                    Rerum voluptate non adipisci animi distinctio et deserunt
+                    amet voluptas. Quia aut aliquid doloremque ut possimus ipsum
+                    officia.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Team Section -->
+
+
+      <!-- ======= Contact Section ======= -->
+      <section id="contact" class="contact">
+        <div class="container" data-aos="fade-up">
+          <header class="section-header">
+            <h2>Contact</h2>
+            <p>Contact Us</p>
+          </header>
+
+          <div class="row gy-4">
+            <div class="col-lg-3">
+              <div class="info-box h-100 d-flex flex-column align-items-center justify-content-center">
+                <i class="bi bi-envelope"></i>
+                <h3>Email Us</h3>
+                <p>info@example.com<br />contact@example.com</p>
+              </div>
+            </div>
+
+            <div class="col-lg-9">
+              <form
+                action="forms/contact.php"
+                method="post"
+                class="php-email-form"
+              >
+                <div class="row gy-4">
+                  <div class="col-md-6">
+                    <input
+                      type="text"
+                      name="name"
+                      class="form-control"
+                      placeholder="Your Name"
+                      required
+                    />
+                  </div>
+
+                  <div class="col-md-6">
+                    <input
+                      type="email"
+                      class="form-control"
+                      name="email"
+                      placeholder="Your Email"
+                      required
+                    />
+                  </div>
+
+                  <div class="col-md-12">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="subject"
+                      placeholder="Subject"
+                      required
+                    />
+                  </div>
+
+                  <div class="col-md-12">
+                    <textarea
+                      class="form-control"
+                      name="message"
+                      rows="6"
+                      placeholder="Message"
+                      required
+                    ></textarea>
+                  </div>
+
+                  <div class="col-md-12 text-center">
+                    <div class="loading">Loading</div>
+                    <div class="error-message"></div>
+                    <div class="sent-message">
+                      Your message has been sent. Thank you!
+                    </div>
+
+                    <button type="submit">Send Message</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Contact Section -->
+    </main>
+    <!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer">
+      <div class="footer-top">
+        <div class="container">
+          <div class="row gy-4">
+            <div class="col-lg-5 col-md-12 footer-info">
+              <a href="index.html" class="logo d-flex align-items-center">
+                <img src="assets/img/logo.png" alt="" />
+                <span>SNEP AI</span>
+              </a>
+              <p>
+                Cras fermentum odio eu feugiat lide par naso tierra. Justo eget
+                nada terra videa magna derita valies darta donna mare fermentum
+                iaculis eu non diam phasellus.
+              </p>
+              <div class="social-links mt-3">
+                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"
+                  ><i class="bi bi-instagram"></i
+                ></a>
+                
+              </div>
+            </div>
+
+            <div class="col-lg-2 col-6 footer-links">
+              <h4>Useful Links</h4>
+              <ul>
+                <li>
+                  <i class="bi bi-chevron-right"></i> <a href="#hero">Home</a>
+                </li>
+                <li>
+                  <i class="bi bi-chevron-right"></i> <a href="#team">Our Team</a>
+                </li>
+                <li>
+                  <i class="bi bi-chevron-right"></i> <a href="#service">Services</a>
+                </li>
+                <li>
+                  <i class="bi bi-chevron-right"></i>
+                  <a href="#">Terms of service</a>
+                </li>
+                <li>
+                  <i class="bi bi-chevron-right"></i>
+                  <a href="#">Privacy policy</a>
+                </li>
+              </ul>
+            </div>
+
+
+            <div
+              class="col-lg-3 col-md-12 footer-contact text-center text-md-start"
+            >
+              <h4>Contact Us</h4>
+              <p>
+                <strong>Email:</strong> info@example.com<br />
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="copyright">
+          &copy; Copyright <strong><span>SNEP AI</span></strong
+          >. All Rights Reserved
+        </div>
+        <div class="credits">
+          <!-- All the links in the footer should remain intact. -->
+          <!-- You can delete the links only if you purchased the pro version. -->
+          <!-- Licensing information: https://bootstrapmade.com/license/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/flexstart-bootstrap-startup-template/ -->
+          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
+      </div>
+    </footer>
+    <!-- End Footer -->
+
+    <a
+      href="#"
+      class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- Vendor JS Files -->
+    <script src="{{url_for('static', filename='assets/vendor/purecounter/purecounter_vanilla.js')}}"></script>
+    <script src="{{url_for('static', filename='assets/vendor/aos/aos.js')}}"></script>
+    <script src="{{url_for('static', filename='assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{url_for('static', filename='assets/vendor/glightbox/js/glightbox.min.js')}}"></script>
+    <script src="{{url_for('static', filename='assets/vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
+    <script src="{{url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.js')}}"></script>
+    <script src="{{url_for('static', filename='assets/vendor/php-email-form/validate.js')}}"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{{url_for('static', filename='assets/js/main.js')}}"></script>
+  </body>
+</html>

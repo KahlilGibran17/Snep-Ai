@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/newscan.css')}}"/>
+{% endblock %}
+
+{% block title_content %}
+News Validation
+{% endblock %}
+
+
+{% block content %}
+<div class="scan-menu col-12 mt-4">
+  <ul class="d-flex gap-3 p-0">
+    <li>
+      <a class="{{ 'active' if active_menu == 'text' else '' }}" href="{{ url_for('informationValidation.scan') }}">
+        <i class='bx bx-text' ></i>
+        <span>Text</span>
+      </a>
+    </li>
+    <li>
+      <a class="{{ 'active' if active_menu == 'image' else '' }}" href="{{ url_for('informationValidation.newscan_image') }}">
+        <i class='bx bx-image-add' ></i>
+        <span>Image</span>
+      </a>
+    </li>
+    <!-- <li>
+      <a class="{{ 'active' if active_menu == 'website' else '' }}" href="">
+        <i class='bx bx-globe' ></i>
+        <span>Website</span>
+      </a>
+    </li> -->
+  </ul>
+</div>
+<div class="main-content col-12">
+    <form action="">
+      {% block input%} 
+      
+      {% endblock%}
+      <div class="row justify-content-end pt-3">
+        <div class="col-auto">
+            <input type="botton" class="btn btn-submit px-4 py-2" id="submit" name="submit" value="Submit">
+        </div>
+    </div>
+    </form>
+    <div class="result">
+      <h2>Result</h2>
+      <div class="result-co ntainer" id="result">
+        ...
+      </div>
+    </div>
+  </div>
+ 
+  <!-- <div class="history col-4">
+    <h2>History</h2>
+    <hr/>
+    <ul id="news-item-list">
+    </ul>
+    <div class="d-flex justify-content-center">
+      <span>
+        <a href="">
+          <i class="fa-solid fa-angle-down"></i>
+        </a>
+      </span>
+    </div>
+  </div> -->
+{% endblock %}
+
+{% block javascript %}
+<script src="{{url_for('static', filename='js/scan.js')}}"></script>
+{% endblock %}

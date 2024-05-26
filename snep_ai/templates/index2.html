@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SNEP AI</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{url_for('.static', filename='style.css')}}"
+    />
+    <link rel="stylesheet" href="../static/index.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+      * {
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-size: 16px;
+      }
+      :root {
+        --main-color: rgba(255, 255, 255, 0.62);
+        --sidebar-color1: #c9d6ff;
+        --sidebar-color2: #e2e2e2;
+        --primary-color: #f64c72;
+        --primary-color-light: #f6f5ff;
+        --toggle-color: #ddd;
+        --text-color: #4b4b4b;
+
+        --tran-02: all 0.2s ease;
+        --tran-03: all 0.3s ease;
+        --tran-04: all 0.4s ease;
+        --tran-05: all 0.4s ease;
+      }
+
+      body {
+        height: 100vh;
+        background: var(--sidebar-color1);
+        background: -webkit-linear-gradient(
+          to right,
+          var(--sidebar-color1),
+          var(--sidebar-color2)
+        );
+        background: linear-gradient(
+          to right,
+          var(--sidebar-color1),
+          var(--sidebar-color2)
+        );
+        padding-right: 30px;
+      }
+      a {
+        text-decoration: none;
+      }
+
+      /* ===== Reuseable CSS ===== */
+      .sidebar .text {
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      .sidebar .image {
+        font-size: 60px;
+        display: flex;
+        align-items: center;
+      }
+      /* ===== Sidebar ===== */
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 250px;
+        padding: 10px 14px;
+        background: rgba(0, 0, 0, 0);
+        transition: var(--tran-05);
+        z-index: 1;
+      }
+      .sidebar.close {
+        width: 88px;
+      }
+      .sidebar.close .text {
+        display: none;
+      }
+      .sidebar ul {
+        padding: 0;
+      }
+      .sidebar li {
+        height: 50px;
+        margin-top: 10px;
+        list-style-type: none;
+        display: flex;
+        align-items: center;
+      }
+      .sidebar li .icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 60px;
+        font-size: 30px;
+      }
+      .sidebar li .icon,
+      .sidebar li .text {
+        color: var(--text-color);
+        transition: var(--tran-02);
+      }
+      .sidebar li .user-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 2px solid black;
+        background-color: #707070;
+      }
+      .sidebar header {
+        position: relative;
+      }
+
+      .sidebar .image-text svg {
+        width: 40px;
+        border-radius: 6px;
+      }
+
+      .sidebar header .image-text {
+        display: flex;
+        align-items: center;
+      }
+
+      header .image .header-text {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .header-text .name {
+        font-weight: 600;
+        font-size: 30px;
+        color: var(--primary-color);
+      }
+
+      .sidebar header .toggle {
+        position: absolute;
+        top: 25%;
+        right: -50px;
+        transform: translate(-50%);
+        height: 35px;
+        width: 35px;
+        background: var(--primary-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        color: var(--sidebar-color1);
+        font-size: 25px;
+      }
+
+      .sidebar li a {
+        height: 100%;
+        width: 100%;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        transition: var(--tran-04);
+        border-radius: 5px;
+      }
+
+      .sidebar li a:hover {
+        background-color: var(--primary-color);
+      }
+      .sidebar li a:hover .icon,
+      .sidebar li a:hover .text {
+        color: var(--sidebar-color1);
+      }
+      .sidebar li.active {
+        background-color: var(--primary-color);
+        border-radius: 5px;
+      }
+      .sidebar li.active .icon,
+      .sidebar li.active .text {
+        color: var(--sidebar-color1);
+      }
+      .sidebar .menu-bar {
+        height: calc(100% - 80px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .sidebar .menu .btn {
+        padding: 15px 20px;
+        font-size: 20px;
+        border-radius: 5px;
+        background-color: white;
+        border: none;
+        transition: all 0.3s ease-in-out;
+      }
+      .sidebar.close .menu .btn {
+        padding: 10px;
+      }
+      .sidebar .menu .btn:hover {
+        box-shadow: 3px 10px 21px -3px #f64c72;
+        color: var(--primary-color);
+        font-weight: bold;
+      }
+      .sidebar .menu .btn:hover .text {
+        color: var(--primary-color);
+        font-weight: bold;
+      }
+
+      .home {
+        position: relative;
+        min-height: calc(100% - 70px);
+        left: 250px;
+        top: 40px;
+        width: calc(100% - 250px);
+        transition: var(--tran-05);
+        color: var(--text-color);
+
+        /* From https://css.glass */
+        background: rgba(255, 255, 255, 0.36);
+        border-radius: 16px 16px 0 0;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+
+        padding: 24px;
+      }
+
+      .sidebar.close ~ .home {
+        left: 88px;
+        width: calc(100% - 88px);
+      }
+
+      .home #home-title {
+        padding-bottom: 10px;
+        border-bottom: 2px solid rgb(147, 147, 147);
+        /* margin-bottom: 20px; */
+      }
+
+      /* ===== Reuseable ===== */
+      .bg-glass {
+        /* From https://css.glass */
+        background: var(--sidebar-color1);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border: 1px solid var(--sidebar-color2);
+      }
+
+      .bg-validation-item {
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 2px rgba(0, 0, 0, 0.27);
+        border-radius: 8px;
+        padding: 5px 10px;
+        transition: all 0.3s ease-in-out;
+      }
+    </style>
+    <!-- {% block css %} {% endblock %} -->
+  </head>
+  <body>
+    <div class="wrapper"></div>
+    <nav class="header"></nav>
+    <div class="sidebar">
+      <a href="" class="d-flex justify-content-center align-items-center">
+        <div class="logo d-flex">
+          <svg
+            class="logo-icon"
+            width="66"
+            height="66"
+            viewBox="0 0 66 66"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M52.7936 9.06817C48.2693 3.13577 41.4249 0 33.0001 0C24.5753 0 17.7309 3.13577 13.2067 9.06817C9.31253 14.1743 7.25415 21.1057 7.25415 29.1131C7.25415 37.8763 9.75803 46.8929 14.1237 53.8508C19.0397 61.6854 25.7434 66 33.0001 66C40.2567 66 46.9606 61.6854 51.8763 53.8508C56.2421 46.8929 58.7459 37.8764 58.7459 29.1131C58.746 21.1057 56.6876 14.1743 52.7936 9.06817ZM15.4398 47.1759L20.4054 48.0716L21.6035 56.4509C19.1446 53.9739 17.0612 50.7709 15.4398 47.1759ZM30.8479 49.1784H26.4939V53.4827H30.8479V61.5246C29.3206 61.2835 27.8581 60.7899 26.4703 60.0802L24.2267 44.3871L13.6531 42.4799C12.2979 38.1827 11.5586 33.5745 11.5586 29.1132C11.5586 23.0081 12.9463 17.4918 15.4968 13.3346V19.7206H19.8011V8.42905C21.1644 7.34675 22.6798 6.47728 24.3417 5.81986V18.1938L30.8479 21.8767V49.1784ZM30.8479 16.9305L28.646 15.6842V4.64552C29.3595 4.52796 30.0939 4.44146 30.8479 4.38487V16.9305ZM35.1523 4.38487C35.9064 4.44159 36.6406 4.52809 37.3541 4.64552V15.6842L35.1523 16.9305V4.38487ZM44.3968 56.4508L45.5949 48.0715L50.5605 47.1757C48.9389 50.7709 46.8556 53.9739 44.3968 56.4508ZM41.7736 44.3868L39.5298 60.08C38.142 60.7896 36.6794 61.2833 35.1522 61.5245V53.4826H39.5061V49.1782H35.1522V21.8767L41.6583 18.1937V5.81973C43.3202 6.47715 44.8356 7.34675 46.1989 8.42892V19.7206H50.5032V13.3346C53.0536 17.4917 54.4414 23.008 54.4414 29.1131C54.4414 33.5744 53.702 38.1828 52.347 42.4798L41.7736 44.3868Z"
+              fill="#F64C72"
+            />
+            <path
+              d="M44.258 26.2695C40.4336 26.2695 37.322 29.3809 37.322 33.2055C37.322 37.03 40.4336 40.1415 44.258 40.1415C48.0825 40.1415 51.194 37.0301 51.194 33.2055C51.194 29.3811 48.0825 26.2695 44.258 26.2695ZM44.258 35.8371C42.807 35.8371 41.6265 34.6566 41.6265 33.2055C41.6265 31.7545 42.807 30.574 44.258 30.574C45.7089 30.574 46.8896 31.7545 46.8896 33.2055C46.8896 34.6566 45.7089 35.8371 44.258 35.8371Z"
+              fill="#F64C72"
+            />
+            <path
+              d="M44.2571 34.9926C45.2443 34.9926 46.0446 34.1924 46.0446 33.2052C46.0446 32.2181 45.2443 31.4178 44.2571 31.4178C43.27 31.4178 42.4697 32.2181 42.4697 33.2052C42.4697 34.1924 43.27 34.9926 44.2571 34.9926Z"
+              fill="#F64C72"
+            />
+            <path
+              d="M21.7421 26.2695C17.9177 26.2695 14.8062 29.3811 14.8062 33.2055C14.8062 37.03 17.9176 40.1415 21.7421 40.1415C25.5666 40.1415 28.6781 37.03 28.6781 33.2055C28.6781 29.3811 25.5666 26.2695 21.7421 26.2695ZM21.7421 35.8371C20.2911 35.8371 19.1106 34.6566 19.1106 33.2055C19.1106 31.7545 20.2911 30.574 21.7421 30.574C23.1932 30.574 24.3737 31.7545 24.3737 33.2055C24.3737 34.6566 23.1932 35.8371 21.7421 35.8371Z"
+              fill="#F64C72"
+            />
+            <path
+              d="M21.7413 34.9926C22.7284 34.9926 23.5287 34.1924 23.5287 33.2052C23.5287 32.2181 22.7284 31.4178 21.7413 31.4178C20.7541 31.4178 19.9539 32.2181 19.9539 33.2052C19.9539 34.1924 20.7541 34.9926 21.7413 34.9926Z"
+              fill="#F64C72"
+            />
+          </svg>
+          <h1>GG AI</h1>
+        </div>
+      </a>
+      <div class="menu">
+        <div class="scan-container">
+          <a href="{{ url_for('newscan_text') }}" class="btn btn-scan"
+            >+ New Scan</a
+          >
+        </div>
+        <ul>
+          <li class="{{ 'active' if active_menu == 'home' else '' }}">
+            <i class="fa-solid fa-house"></i>
+            <a href="{{ url_for('index') }}">Home</a>
+          </li>
+          <li class="{{ 'active' if active_menu == 'chatbot' else '' }}">
+            <i class="fa-solid fa-comments"></i>
+            <a href="{{ url_for('chatbot') }}">Chatbot</a>
+          </li>
+          <li class="{{ 'active' if active_menu == 'newsvalidation' else '' }}">
+            <i class="fa-solid fa-newspaper"></i>
+            <a href="{{ url_for('newsvalidation') }}">News Validation</a>
+          </li>
+          <li class="{{ 'active' if active_menu == 'history' else '' }}">
+            <i class="fa-solid fa-file-invoice"></i>
+            <a href="{{ url_for('history') }}">History</a>
+          </li>
+          <li class="{{ 'active' if active_menu == 'credit' else '' }}">
+            <i class="fa-solid fa-money-bill"></i>
+            <a href="{{ url_for('credit') }}">Credit</a>
+          </li>
+        </ul>
+      </div>
+      <div class="opt-menu">
+        <div class="user-container">
+          <span></span>
+          <a class="user" href="">User</a>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      <!-- <h1>{% block title_content %} {% endblock %}</h1> -->
+      <h1>Helo world</h1>
+      <!-- <div class="main row">{% block content %} {% endblock %}</div> -->
+      <div class="main row"></div>
+    </div>
+
+    <script
+      src="https://kit.fontawesome.com/6489143c99.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

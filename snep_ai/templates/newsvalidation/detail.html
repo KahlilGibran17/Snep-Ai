@@ -1,0 +1,73 @@
+{% extends "base.html" %} {% block css%}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{{url_for('static', filename='css/newsvalidation.css')}}"
+/>
+
+<style>
+    td {
+        padding: 12px;
+    }
+</style>
+{% endblock %}
+
+{% block title_content %} News Validation {% endblock %}
+
+{% block content %}
+<div class="newsvalidation-container d-flex flex-column p-4">
+    <div>
+        <a href="{{ url_for('informationValidation.newsvalidation') }}" class="btn btn-secondary mb-4" style="width: auto;">
+            <i class="bx bx-left-arrow-alt icon"></i>
+            Back
+        </a>
+    </div>
+    <h4>{{ detail.title }}</h4>
+    <div class="my-2">
+        <table style="width: auto;">
+            <tr>
+                <td>Status</td>
+                <td>:</td>
+                <td>
+                    {% if detail.status == 'true' %}
+                        <span class="p-1 bg-success rounded text-white">Valid</span>
+                        {% else %}
+                        <span class="p-1 bg-danger rounded text-white">Fake</span>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>Probability</td>
+                <td>:</td>
+                <td>
+                    {{ detail.probability }}%
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align:top;">Reason</td>
+                <td style="vertical-align:top;">:</td>
+                <td>
+                    {{ detail.reason }}
+                </td>
+            </tr>
+        </table>
+    </div>
+    <p class="mt-3">
+        {% if detail.content[0] == '/' %}
+            <img data-img="{{ detail.content }}" alt="{{ detail.title }}" id="detail-news-validation-image" style="min-height: 400px; max-height: 600px;">
+        {% else %}
+            {{ detail.content }}
+        {% endif %}
+    </p>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+    const data = document.querySelector("#detail-news-validation-image");
+    image = data.dataset.img;
+
+    document.getElementById("detail-news-validation-image").src = "data:image/jpeg;charset=utf-8;base64, "+image;
+</script>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %} {% block title_content %} Credit {% endblock %}
+{%block css%}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{{url_for('static', filename='css/credit.css')}}"
+/>
+{% endblock %} {%block content %}
+<div class="credit-container d-flex flex-column p-4">
+  <div class="credit alert bg-home d-flex align-items-center" role="alert">
+    <span class="credit text d-flex">
+      Current Credits:
+      <span class="current-credit d-flex align-items-center ms-3">
+        3,000
+        <i class="bx bxl-bitcoin ms-1"></i>
+      </span>
+    </span>
+  </div>
+  <div class="credit-container">
+    <h3 class="title">Top Up</h3>
+    <a class="credit-item" href="">
+      <i class="bx bxl-bitcoin"></i>
+      <span>1,000 credits</span>
+    </a>
+    <a class="credit-item" href="">
+      <i class="bx bxl-bitcoin"></i>
+      <span>5,000 credits</span>
+    </a>
+    <a class="credit-item disc" href="">
+      <i class="bx bxl-bitcoin"></i>
+      <span>10,000 credits</span>
+    </a>
+    <a class="credit-item" href="">
+      <i class="bx bxl-bitcoin"></i>
+      <span>15,000 credits</span>
+    </a>
+    <a class="credit-item" href="">
+      <i class="bx bxl-bitcoin"></i>
+      <span>25,000 credits</span>
+    </a>
+    <a class="credit-item" href="">
+      <i class="bx bxl-bitcoin"></i>
+      <span>100,000 credits</span>
+    </a>
+  </div>
+</div>
+{% endblock %} {% block js%} {% endblock %}

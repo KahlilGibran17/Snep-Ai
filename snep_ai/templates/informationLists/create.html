@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/newscan.css')}}"/>
+    
+    <style>
+        .form-check input:checked {
+            background-color: #f64c72;
+            border-color: white;
+        }
+        
+        .form-check input[type=radio] {
+            border-radius: 50%;
+        }
+        
+        .form-check .form-check input {
+            float: left;
+            margin-left: -1.5em;
+        }
+
+        .form-check input {
+            --bs-form-check-bg: white;
+            flex-shrink: 0;
+            width: 1em;
+            height: 1em;
+            margin-top: .25em;
+            vertical-align: top;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-color: white;
+            background-image: var(--bs-form-check-bg-image);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            border: var(--bs-border-width) solid white;
+            -webkit-print-color-adjust: exact;
+            color-adjust: exact;
+            print-color-adjust: exact;
+        }
+    </style>
+{% endblock %}
+
+{% block title_content %}
+    Manage Information Lists
+{% endblock %}
+
+{% block content %}
+<div class="main-content col-12 mt-4">
+    <h3>Add New Information List</h3>
+    <div class="mb-3">
+        <a href="{{ url_for('informationLists.index') }}" class="btn btn-secondary">
+            <i class="bx bx-left-arrow-alt icon"></i>
+            Back
+        </a>
+    </div>
+    
+    {% with messages = get_flashed_messages(category_filter=["success"]) %}
+        {% if messages %}
+            <div class="mt-4">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Success!</strong> {{ messages[0] }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    {% with messages = get_flashed_messages(category_filter=["warning"]) %}
+        {% if messages %}
+            <div class="mt-4">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Warning!</strong> {{ messages[0] }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    {% with messages = get_flashed_messages(category_filter=["error"]) %}
+        {% if messages %}
+            <div class="mt-4">
+                <div class="alert alert-error alert-dismissible fade show" role="alert">
+                    <strong>Error!</strong> {{ messages[0] }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    {{ ckeditor.load() }}
+    <form method="POST" action="{{ url_for('informationLists.create') }}" autocomplete="off" enctype="multipart/form-data">
+        <div class="form-group mb-4">
+            <h4><label for="title">Title</label></h4>
+            <input type="text" class="form-control" id="title" name="title" placeholder="Insert News Title Here" required="">
+        </div>
+        <div class="form-group mb-4">
+            <h4><label for="content">Content</label></h4>
+            {{ ckeditor.create(name="content") }}
+            <!-- <textarea name="content" id="content" class="form-control" rows="5" placeholder="Insert News Content Here"></textarea> -->
+        </div>
+        <div class="form-group mb-4">
+            <h4><label for="category">Category</label></h4>
+            <select class="form-select" name="type" id="type" required>
+              <!-- option insert here -->
+              <option selected disabled>-- Select news category --</option>
+              {% if countCategories > 0 %}
+                {% for category in categories %}
+                  <option value="{{ category.id }}">{{ category.label }}</option>
+                {% endfor %}
+              {% endif %}
+            </select>
+        </div>
+        <div class="form-group mb-4">
+            <h4><label for="date">Date</label></h4>
+            <input type="date" class="form-control" id="input-date" name="date" required="">
+        </div>
+        <div class="form-group mb-4">
+            <h4><label for="image1">Upload Image</label></h4>
+            <label for="image" id="drop-area">
+                <input type="file" id="image" name="image" hidden="">
+                <div id="img-view">
+                <div id="icon-container">
+                    <i class="bx bxs-cloud-upload"></i>
+                    <p>Drag and drop or click here <br>to upload image</p>
+                    <span>Upload any images from desktop</span>
+                </div>
+                </div>
+            </label>
+        </div>
+    
+        <div class="row justify-content-end pt-3">
+            <div class="col-auto">
+                <input type="submit" class="btn btn-submit px-4 py-2"></input>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script src="https://cdn.ckeditor.com/4.10.0/standard/ckeditor.js"></script>
+<script src="{{url_for('static', filename='js/scan.js')}}"></script>
+{% endblock %}

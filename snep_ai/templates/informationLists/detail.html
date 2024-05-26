@@ -1,0 +1,61 @@
+{% extends "base.html" %} {% block css%}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{{url_for('static', filename='css/newsvalidation.css')}}"
+/>
+
+<style>
+    td {
+        padding: 12px;
+    }
+</style>
+{% endblock %}
+
+{% block title_content %} Detail News {% endblock %}
+
+{% block content %}
+<div class="newsvalidation-container d-flex flex-column p-4">
+    <div>
+        <a href="{{ url_for('informationLists.index') }}" class="btn btn-secondary mb-4" style="width: auto;">
+            <i class="bx bx-left-arrow-alt icon"></i>
+            Back
+        </a>
+    </div>
+    <h4>{{ detail.title }}</h4>
+    <div class="my-2">
+        <table style="width: auto;">
+            <tr>
+                <td>&nbsp;Category</td>
+                <td>:</td>
+                <td>
+                    {{ detail.information_category.label }}
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;Date</td>
+                <td>:</td>
+                <td>
+                    {{ detail.timerelevancy }}&nbsp;&nbsp;
+                </td>
+            </tr>
+        </table>
+    </div>
+    <p class="mt-3">
+        <img src="/static/images/{{ detail.image }}" width="500" alt="Foto Berita">
+    </p>
+    <p class="mt-3">
+        {{ detail.content|safe }}
+    </p>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+    const data = document.querySelector("#detail-news-validation-image");
+    image = data.dataset.img;
+
+    document.getElementById("detail-news-validation-image").src = "data:image/jpeg;charset=utf-8;base64, "+image;
+</script>
+{% endblock %}

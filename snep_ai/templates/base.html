@@ -1,0 +1,85 @@
+<!-- <!DOCTYPE html> -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SNEP AI</title>
+    {% include '_includes/head.html' %} {% block css%} {% endblock %}
+  </head>
+  <body>
+    {% include '_includes/navbar.html' %}
+    <div class="head"></div>
+    <section class="home d-flex flex-column bg-home">
+      <h2 id="home-title">{% block title_content %} {% endblock %}</h2>
+      <div class="main row">{% block content %} {% endblock %}</div>
+    </section>
+
+    {% block javascript %} {% endblock %} {% include '_includes/scripts.html' %}
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const sidebar = document.getElementById("sidebar");
+
+        sidebar.addEventListener("mouseenter", function () {
+          if (this.classList.contains("close")) {
+            this.classList.remove("close");
+          }
+        });
+
+        // sidebar.addEventListener("mouseleave", function () {
+        //   if (!this.classList.contains("close")) {
+        //     this.classList.add("close");
+        //   }
+        // });
+      });
+    </script>
+  </body>
+</html>
+
+<div
+  class="modal fade"
+  id="informationCategory"
+  tabindex="-1"
+  aria-labelledby="informationCategoryLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form
+        action="{{ url_for('informationCategory.create') }}"
+        method="POST"
+        autocomplete="off"
+      >
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="informationCategoryLabel">
+            Add New Catgory
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <h4><label for="category_label">Category Label</label></h4>
+          <input
+            type="text"
+            name="category_label"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,83 @@
+{% extends "auth/base.html" %} {% block content %}
+<h2>Login</h2>
+<h6>Log in to access your SNEP AI account</h6>
+<!-- <div class="social-wrapper d-flex mt-4 gap-2 row ms-1">
+  <button class="col-7">
+    <img
+      src="static\assets\google_logo.svg"
+      alt=""
+      style="width: 40px; height: 40px"
+    />
+    <span class="fw-bold">Login with Google</span>
+  </button>
+  <button class="col-2">
+    <i class="bx bxl-facebook-square text-primary"></i>
+  </button>
+  <button class="col-2">
+    <i class="bx bxl-github"></i>
+  </button>
+</div>
+<div class="or-wrapper d-flex">
+  <h6>or</h6>
+</div> -->
+
+<div class="mt-2">
+  {% from "_includes/formhelpers.html" import render_field %}
+  {% with messages = get_flashed_messages(category_filter=["success"]) %}
+    {% if messages %}
+      <div class="alert alert-success" id="message">{{ messages[0] }}</div>
+    {% endif %}
+  {% endwith %}
+  {% with messages = get_flashed_messages(category_filter=["warning"]) %}
+    {% if messages %}
+      <div class="alert alert-warning" id="message">{{ messages[0] }}</div>
+    {% endif %}
+  {% endwith %}
+  {% with messages = get_flashed_messages(category_filter=["danger"]) %}
+    {% if messages %}
+      <div class="alert alert-danger" id="message">{{ messages[0] }}</div>
+    {% endif %}
+  {% endwith %}
+    
+  <form method="POST" action="{{ url_for('auth.login') }}" autocomplete="off" s>
+    {{ form.csrf_token }}
+  
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      {{ render_field(form.username) }}
+      <!-- <input
+          type="email"
+          class="form-control"
+          id="username"
+          aria-describedby="emailHelp"
+        /> -->
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      {{ render_field(form.password) }}
+      <!-- <input type="password" class="form-control" id="password" /> -->
+    </div>
+    <!-- <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+      <label class="form-check-label" for="exampleCheck1">Remember me</label>
+    </div> -->
+    <input
+      type="submit"
+      value="Login"
+      class="btn btn-lg w-100 fs-5 text-light mt-2"
+      style="background-color: var(--primary-color); font-weight: bold"
+    />
+    <!-- <button
+      type="submit"
+      class="btn d-flex w-100 fs-5 fw-bold text-light mt-5"
+      style="background-color: var(--primary-color)"
+    >
+      Submit
+    </button> -->
+  </form>
+</div>
+<div class="mt-2">
+  Don't have an account yet?
+  <a href="{{ url_for('auth.register') }}">Sign Up</a>
+</div>
+{% endblock %}

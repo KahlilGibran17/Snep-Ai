@@ -1,0 +1,4 @@
+from . import LoginForm
+from . import RegisterForm
+from . import UserForm
+from . import InformationListForm
