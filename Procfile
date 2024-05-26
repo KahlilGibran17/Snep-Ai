@@ -1,1 +1,1 @@
-web: waitress-serve --host 127.0.0.1 --port 8000 --call snep_ai:create_app
+web: waitress-serve --port 8000 --call snep_ai:create_app
