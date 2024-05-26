@@ -47,18 +47,18 @@ CREATE TABLE chat_logs (
     FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
-GRANT ALL PRIVILEGES ON TABLE users TO snepai;
-GRANT ALL PRIVILEGES ON TABLE information_categories TO snepai;
-GRANT ALL PRIVILEGES ON TABLE information_lists TO snepai;
-GRANT ALL PRIVILEGES ON TABLE prompt_logs TO snepai;
-GRANT ALL PRIVILEGES ON TABLE chat_logs TO snepai;
+GRANT ALL PRIVILEGES ON TABLE users TO lsffsezngtsopp;
+GRANT ALL PRIVILEGES ON TABLE information_categories TO lsffsezngtsopp;
+GRANT ALL PRIVILEGES ON TABLE information_lists TO lsffsezngtsopp;
+GRANT ALL PRIVILEGES ON TABLE prompt_logs TO lsffsezngtsopp;
+GRANT ALL PRIVILEGES ON TABLE chat_logs TO lsffsezngtsopp;
 
--- GRANT USAGE, SELECT ON SEQUENCE users_id_seq TO snepai;
+-- GRANT USAGE, SELECT ON SEQUENCE users_id_seq TO lsffsezngtsopp;
 
-GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO snepai;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO lsffsezngtsopp;
 
 INSERT INTO users (username, password, is_admin) VALUES
-('admin', 'scrypt:32768:8:1$t3QxtxoWuRvcYh2S$6a106cb9dfb6f3d602d09502d3eb8bcfe3d86e5406a7f048ad1a4be6edb69efb520c947e7ee7d8b249ea54fef603ca16ab23b8cafb21d0aa7d74cb7fdc70dfee', 1);
+('admin', 'scrypt:32768:8:1$t3QxtxoWuRvcYh2S$6a106cb9dfb6f3d602d09502d3eb8bcfe3d86e5406a7f048ad1a4be6edb69efb520c947e7ee7d8b249ea54fef603ca16ab23b8cafb21d0aa7d74cb7fdc70dfee', true);
 
 INSERT INTO information_categories (label) VALUES
 ('Politics'),

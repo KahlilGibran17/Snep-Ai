@@ -7,10 +7,10 @@ class Base(DeclarativeBase):
 
 url = URL.create(
     drivername="postgresql",
-    username='snepai',
-    password='********',
+    username='lsffsezngtsopp',
+    password='479c2473c4a74232723b00658bd5263312d8cf813933770056591d5007d44dc0',
     host='ep-tight-hat-a4gipbbj.us-east-1.pg.koyeb.app',
-    database='information_validation_news',
+    database='dbj3tq4jjfh1ci',
 )
 
 engine = create_engine(url)
